@@ -12,7 +12,7 @@ const html = document.documentElement;
 const normalizePhone = (value) => value.replace(/\D/g, "");
 const toWhatsAppNumber = (value) => {
   const digits = normalizePhone(value);
-  if (digits.startsWith("54") && digits.length > 2 && digits[2] !== "9") {
+  if (digits.startsWith("54") && !digits.startsWith("549")) {
     return `549${digits.slice(2)}`;
   }
   return digits;
