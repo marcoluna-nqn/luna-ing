@@ -10,7 +10,14 @@ const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
 const html = document.documentElement;
 
 const normalizePhone = (value) => value.replace(/\D/g, "");
-const whatsappNumber = normalizePhone(CONTACT.whatsappRaw);
+const toWhatsAppNumber = (value) => {
+  const digits = normalizePhone(value);
+  if (digits.startsWith("54") && digits.length > 2 && digits[2] !== "9") {
+    return `549${digits.slice(2)}`;
+  }
+  return digits;
+};
+const whatsappNumber = toWhatsAppNumber(CONTACT.whatsappRaw);
 const whatsappMessage = encodeURIComponent("Hola Luna Ing, quiero pedir un presupuesto.");
 const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
 const emailHref = `mailto:${CONTACT.email}`;
